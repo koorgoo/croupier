@@ -22,6 +22,24 @@ class TestCase(TestCase):
         self.client.login(username='admin', password='admin')
 
 
+class AuthAPITests(TestCase):
+    def test_login_fails(self):
+        data = {'username': '', 'password': ''}
+        resp = self.client.post(reverse('api-login'), data=data)
+        assert resp.status_code == status.HTTP_403_FORBIDDEN
+
+    def test_login(self):
+        data = {'username': 'admin', 'password': 'admin'}
+        resp = self.client.post(reverse('api-login'), data=data)
+        assert resp.status_code == status.HTTP_200_OK
+        # TODO: check logged-in user is admin
+
+    def test_logout(self):
+        resp = self.client.get(reverse('api-logout'))
+        assert resp.status_code == status.HTTP_200_OK
+        # TODO: check logged-in user is anonymous
+
+
 class CardsAPITests(TestCase):
     def test_unauthed_can_retrieve_cards(self):
         resp = self.client.get(reverse('api-cards'))
