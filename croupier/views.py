@@ -1,5 +1,6 @@
 from django.contrib.auth import (authenticate, login as auth_login,
     logout as auth_logout)
+from django.shortcuts import render
 
 from rest_framework import exceptions, generics, status
 from rest_framework.authentication import SessionAuthentication
@@ -9,6 +10,10 @@ from rest_framework.views import APIView
 
 from .models import Deck, Card
 from .serializers import UserSerializer, DeckSerializer, CardSerializer
+
+
+def index(request):
+    return render(request, 'croupier/index.html')
 
 
 class Login(APIView):
