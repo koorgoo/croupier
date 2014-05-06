@@ -1,15 +1,15 @@
 requirejs.config({
   paths: {
-    jquery                : 'lib/jquery',
-    underscore            : 'lib/underscore',
-    backbone              : 'lib/backbone',
+    jquery: 'lib/jquery',
+    underscore: 'lib/underscore',
+    backbone: 'lib/backbone',
     'backbone.babysitter' : 'lib/backbone.babysitter',
-    'backbone.wreqr'      : 'lib/backbone.wreqr',
-    marionette            : 'lib/backbone.marionette',
-    requireLib            : 'lib/requirejs/require',
-    text                  : 'lib/requirejs/text',
-    cs                    : 'lib/requirejs/cs',
-    'coffee-script'       : 'lib/coffee-script',
+    'backbone.wreqr': 'lib/backbone.wreqr',
+    marionette: 'lib/backbone.marionette',
+    requireLib: 'lib/requirejs/require',
+    text: 'lib/requirejs/text',
+    cs: 'lib/requirejs/cs',
+    'coffee-script': 'lib/coffee-script',
   },
   shim: {
     jquery: {

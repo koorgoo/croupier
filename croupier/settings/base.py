@@ -8,8 +8,8 @@ TEMPLATE_DEBUG = DEBUG
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'croupier.db'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': '',
         'USER': '',
         'PASSWORD': '',
         'HOST': '',
