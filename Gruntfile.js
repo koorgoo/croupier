@@ -5,14 +5,14 @@ module.exports = function(grunt) {
         options: {
           optimize: 'none',
           mainConfigFile: 'app/scripts/config.js',
-          out: 'croupier/static/croupier/app.js',
+          out: 'croupier/static/croupier/js/app.js',
         }
       },
       prod: {
         options: {
           optimize: 'uglify',
           mainConfigFile: 'app/scripts/config.js',
-          out: 'croupier/static/croupier/app.js',
+          out: 'croupier/static/croupier/js/app.js',
         }
       }
     },
@@ -21,14 +21,18 @@ module.exports = function(grunt) {
         options: {
           paths: ['app/styles'],
         },
-        files: { 'croupier/static/croupier/app.css': 'app/styles/main.less' }
+        files: { 
+          'croupier/static/croupier/css/app.css': 'app/styles/main.less' 
+        }
       },
       prod: {
         options: {
           paths: ['app/styles'],
           cleancss: true
         },
-        files: { 'croupier/static/croupier/app.css': 'app/styles/main.less' }
+        files: { 
+          'croupier/static/croupier/css/app.css': 'app/styles/main.less' 
+        }
       }
     },
     watch: {
