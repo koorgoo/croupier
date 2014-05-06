@@ -20,13 +20,15 @@ class Login(APIView):
     def post(self, *args, **kwargs):
         u = self.request.DATA.get('username')
         p = self.request.DATA.get('password')
+        if not u or not p:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
         user = authenticate(username=u, password=p)
         if not user:
             raise exceptions.NotAuthenticated()
 
         auth_login(self.request, user)
-        return Response(UserSerializer(user).data)
+        return Response(UserSerializer(self.request.user).data)
 
 login = Login.as_view()
 

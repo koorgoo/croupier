@@ -24,21 +24,30 @@ class TestCase(TestCase):
 
 
 class ApiAuthTests(TestCase):
-    def test_login_fails(self):
+    url = reverse('api-login')
+
+    def test_no_credentials(self):
+        self.client.logout()
+        resp = self.client.post(self.url, data={})
+        assert resp.status_code == status.HTTP_400_BAD_REQUEST
+
+    def test_empty_credentials(self):
+        self.client.logout()
         data = {'username': '', 'password': ''}
-        resp = self.client.post(reverse('api-login'), data=data)
-        assert resp.status_code == status.HTTP_403_FORBIDDEN
+        resp = self.client.post(self.url, data=data)
+        assert resp.status_code == status.HTTP_400_BAD_REQUEST
 
     def test_login(self):
+        self.client.logout()
         data = {'username': 'admin', 'password': 'admin'}
-        resp = self.client.post(reverse('api-login'), data=data)
+        resp = self.client.post(self.url, data=data)
         assert resp.status_code == status.HTTP_200_OK
-        # TODO: check logged-in user is admin
+        assert resp.data['username'] == 'admin'
 
     def test_logout(self):
+        self.login()
         resp = self.client.get(reverse('api-logout'))
         assert resp.status_code == status.HTTP_200_OK
-        # TODO: check logged-in user is anonymous
 
 
 class ApiDecksTest(TestCase):
