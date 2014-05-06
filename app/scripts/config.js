@@ -4,6 +4,7 @@ requirejs.config({
     underscore: 'lib/underscore',
     backbone:   'lib/backbone',
     marionette: 'lib/backbone.marionette',
+    coffee:     'lib/coffee-script',
     requireLib: 'lib/requirejs/require',
     text:       'lib/requirejs/text',
     cs:         'lib/requirejs/cs',
@@ -24,6 +25,8 @@ requirejs.config({
       exports: 'Backbone.Marionette'
     }
   },
+  stubModules: ['cs', 'text'],
+  exclude: ['coffee'],
   name: 'requireLib',
   include: ['main']
 });

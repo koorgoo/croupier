@@ -4,7 +4,7 @@ module.exports = function(grunt) {
       compile: {
         options: {
           optimize: 'none',
-          mainConfigFile: 'app/scripts/build.js',
+          mainConfigFile: 'app/scripts/config.js',
           out: 'croupier/static/croupier/app.js',
         }
       }
@@ -18,7 +18,11 @@ module.exports = function(grunt) {
     },
     watch: {
       scripts: {
-        files: 'app/scripts/**/*.js',
+        files: [
+          'app/scripts/**/*.js', 
+          'app/scripts/**/*.coffee',
+          'app/scripts/**/*.html'
+        ],
         tasks: ['requirejs'],
         options: {
           interrupt: true,
