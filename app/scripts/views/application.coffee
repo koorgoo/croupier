@@ -1,7 +1,7 @@
 define [
-  'marionette', 
+  'marionette',
   'text!templates/application.html'
-], (Backbone, Template) ->
+], (Marionette, Template) ->
   Marionette.ItemView.extend
     template: Template
     render: () ->

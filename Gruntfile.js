@@ -21,8 +21,8 @@ module.exports = function(grunt) {
         options: {
           paths: ['app/styles'],
         },
-        files: { 
-          'croupier/static/croupier/css/app.css': 'app/styles/main.less' 
+        files: {
+          'croupier/static/croupier/css/app.css': 'app/styles/main.less'
         }
       },
       prod: {
@@ -30,15 +30,15 @@ module.exports = function(grunt) {
           paths: ['app/styles'],
           cleancss: true
         },
-        files: { 
-          'croupier/static/croupier/css/app.css': 'app/styles/main.less' 
+        files: {
+          'croupier/static/croupier/css/app.css': 'app/styles/main.less'
         }
       }
     },
     watch: {
       scripts: {
         files: [
-          'app/scripts/**/*.js', 
+          'app/scripts/**/*.js',
           'app/scripts/**/*.coffee',
           'app/scripts/**/*.html'
         ],
@@ -57,7 +57,6 @@ module.exports = function(grunt) {
   });
 
   grunt.loadNpmTasks('grunt-contrib-requirejs');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-watch');
 

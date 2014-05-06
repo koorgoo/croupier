@@ -4,9 +4,11 @@ define [
 ], (Marionette, AppView) ->
   app = new Marionette.Application()
 
-  app.addRegion
+  app.addRegions
     pageRegion: '#page'
 
-  app.addInitialized () ->
+  app.addInitializer () ->
     view = new AppView()
-    app.pageRegion.show view
+    app.pageRegion.show(view)
+
+  app

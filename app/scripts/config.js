@@ -1,13 +1,15 @@
 requirejs.config({
   paths: {
-    jquery:     'lib/jquery',
-    underscore: 'lib/underscore',
-    backbone:   'lib/backbone',
-    marionette: 'lib/backbone.marionette',
-    coffee:     'lib/coffee-script',
-    requireLib: 'lib/requirejs/require',
-    text:       'lib/requirejs/text',
-    cs:         'lib/requirejs/cs',
+    jquery                : 'lib/jquery',
+    underscore            : 'lib/underscore',
+    backbone              : 'lib/backbone',
+    'backbone.babysitter' : 'lib/backbone.babysitter',
+    'backbone.wreqr'      : 'lib/backbone.wreqr',
+    marionette            : 'lib/backbone.marionette',
+    requireLib            : 'lib/requirejs/require',
+    text                  : 'lib/requirejs/text',
+    cs                    : 'lib/requirejs/cs',
+    'coffee-script'       : 'lib/coffee-script',
   },
   shim: {
     jquery: {
@@ -21,12 +23,18 @@ requirejs.config({
       exports: 'Backbone'
     },
     marionette: {
-      deps: ['backbone'],
+      deps: [
+        'jquery',
+        'underscore',
+        'backbone',
+        'backbone.babysitter',
+        'backbone.wreqr'
+      ],
       exports: 'Backbone.Marionette'
     }
   },
   stubModules: ['cs', 'text'],
-  exclude: ['coffee'],
+  exclude: ['coffee-script'],
   name: 'requireLib',
   include: ['main']
 });
