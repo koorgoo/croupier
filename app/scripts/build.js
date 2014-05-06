@@ -1,5 +1,4 @@
-({
-  baseUrl: '.',
+requirejs.config({
   paths: {
     jquery:     'lib/jquery',
     underscore: 'lib/underscore',
@@ -26,6 +25,5 @@
     }
   },
   name: 'requireLib',
-  include: ['main'],
-  out: '../../croupier/static/croupier/app.js',
-})
+  include: ['main']
+});
