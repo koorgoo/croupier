@@ -4,9 +4,9 @@ define [
   'text!templates/layouts/application.html'
 ], (_, Marionette, Template) ->
   Marionette.Layout.extend
-    el: '#page'
-
+    el: '#home'
     template: _.template(Template)
-
     regions: 
-      search: '#search'
+      header: '#header'
+      content: '#content'
+      footer: '#footer'
