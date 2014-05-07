@@ -35,6 +35,14 @@ module.exports = function(grunt) {
         }
       }
     },
+    copy: {
+      fonts: {
+        expand: true,
+        cwd: 'app/fonts/',
+        src: ['**'],
+        dest: 'croupier/static/croupier/fonts/'
+      }
+    },
     watch: {
       scripts: {
         files: [
@@ -58,8 +66,9 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-requirejs');
   grunt.loadNpmTasks('grunt-contrib-less');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('default', ['requirejs:dev', 'less:dev']);
-  grunt.registerTask('build', ['requirejs:prod', 'less:prod']);
+  grunt.registerTask('default', ['requirejs:dev', 'less:dev', 'copy']);
+  grunt.registerTask('build', ['requirejs:prod', 'less:prod', 'copy']);
 };

@@ -1,14 +1,15 @@
 define [
   'marionette',
-  'cs!views/application',
-], (Marionette, AppView) ->
+  'cs!views/layouts/application',
+  'cs!views/search',
+], (Marionette, AppLayout, SearchView) ->
   app = new Marionette.Application()
 
-  app.addRegions
-    pageRegion: '#page'
-
   app.addInitializer () ->
-    view = new AppView()
-    app.pageRegion.show(view)
+    layout = new AppLayout()
+    view = new SearchView()
+
+    layout.render()
+    layout.search.show(view)
 
   app
