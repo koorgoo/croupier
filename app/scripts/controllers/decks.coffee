@@ -7,14 +7,12 @@ define [
     getDeckSet: (options) ->
       options or (options = {})
       defer = $.Deferred()
-      self = @
 
       setTimeout () ->
         deckSet = new DeckSet()
         deckSet.fetch
           data: q: options.q
           success: () ->
-            self.deckSet = deckSet
             defer.resolve deckSet
 
       defer.promise()

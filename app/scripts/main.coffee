@@ -1,8 +1,9 @@
 require [
   'cs!app'
-  'cs!views/layouts/application',
-  'cs!views/search/form',
+  'cs!views/layouts/application'
+  'cs!views/search/form'
   'cs!views/search/list'
+  'cs!router'
 ], (app, AppLayout, SearchView, DeckSetView) ->
   app.addInitializer () ->
     layout = new AppLayout()

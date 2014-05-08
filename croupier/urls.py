@@ -7,8 +7,6 @@ from .views import index, login, logout, decks, deck, deck_cards, card
 
 
 urlpatterns = patterns('',
-    url(r'^$', index, name='index'),
-
     # Authentication API
     url(r'^api/login$', login, name='api-login'),
     url(r'^api/logout$', logout, name='api-logout'),
@@ -20,4 +18,6 @@ urlpatterns = patterns('',
     url(r'^api/card/(?P<pk>\d+)$', card, name='api-card'),
 
     url(r'^admin/', include(admin.site.urls)),
+
+    url(r'^', index, name='index'),
 )
