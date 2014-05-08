@@ -1,7 +1,20 @@
 define [
+  'jquery',
   'marionette',
-  'cs!app'
-], (Marionette, app) ->
+  'cs!collections/decks'
+], ($, Marionette, DeckSet) ->
   Marionette.Controller.extend
-    ### TODO: listen to app and return decks ###
-    ### TODO: listen to app and filter decks ###
+    getDeckSet: (options) ->
+      options or (options = {})
+      defer = $.Deferred()
+      self = @
+
+      setTimeout () ->
+        deckSet = new DeckSet()
+        deckSet.fetch
+          data: q: options.q
+          success: () ->
+            self.deckSet = deckSet
+            defer.resolve deckSet
+
+      defer.promise()

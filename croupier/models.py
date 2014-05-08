@@ -12,6 +12,10 @@ class Deck(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def size(self):
+        return self.card_set.count()
+
 
 class Card(models.Model):
     front = models.TextField()

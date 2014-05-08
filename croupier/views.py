@@ -55,6 +55,13 @@ class DeckList(AdminPermMixin, generics.ListCreateAPIView):
     def pre_save(self, deck):
         deck.owner = self.request.user
 
+    def get_queryset(self):
+        queryset = super(DeckList, self).get_queryset()
+        q = self.request.QUERY_PARAMS.get('q', None)
+        if q:
+            return queryset.filter(name__icontains=q)
+        return queryset
+
 decks = DeckList.as_view()
 
 

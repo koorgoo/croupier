@@ -13,7 +13,7 @@ class TestCase(TestCase):
         kwargs = dict(username='admin', password='admin', email='admin@test.com')
         self.admin = User.objects.create_superuser(**kwargs)
         self.user = User.objects.create_user(username='user', password='user')
-        self.deck = Deck.objects.create(name='simple')
+        self.deck = Deck.objects.create(name='test')
         self.card = Card.objects.create(deck=self.deck, front='one', back='two')
 
     def login(self):
@@ -58,6 +58,12 @@ class ApiDecksTest(TestCase):
         assert resp.status_code == status.HTTP_200_OK
         assert len(resp.data) == 1
 
+    def test_retrieve_filtered_decks(self):
+        Deck.objects.create(name='Super Mega Deck')
+        resp = self.client.get(self.url, data=dict(q='mega'))
+        assert resp.status_code == status.HTTP_200_OK
+        assert len(resp.data) == 1
+
     def test_unauthed_cannot_create_deck(self):
         resp = self.client.post(self.url, data=dict(name='foo'))
         assert resp.status_code == status.HTTP_403_FORBIDDEN
@@ -80,6 +86,8 @@ class ApiDeckTests(TestCase):
     def test_retrieve_deck(self):
         resp = self.client.get(self.url)
         assert resp.status_code == status.HTTP_200_OK
+        assert resp.data['id'] == self.deck.id
+        assert resp.data['size'] == self.deck.size
 
     def test_unauthed_cannot_update_deck(self):
         resp = self.client.patch(self.url, data={'name': 'bar'})

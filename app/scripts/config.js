@@ -36,5 +36,5 @@ requirejs.config({
   stubModules: ['cs', 'text'],
   exclude: ['coffee-script'],
   name: 'requireLib',
-  include: ['main']
+  include: ['cs!main']
 });

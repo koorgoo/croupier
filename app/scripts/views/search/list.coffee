@@ -1,9 +1,16 @@
 define [
+  'cs!app',
   'marionette',
   'cs!collections/decks',
   'cs!views/search/item'
-], (Marionette, DeckSet, ItemView) ->
+], (app, Marionette, DeckSet, ItemView) ->
   Marionette.CollectionView.extend
     tagName: 'ul'
     itemView: ItemView
-    collection: new DeckSet [{ name: 'Simple'}]
+    initialize: () ->
+      self = @
+      @listenTo app.vent, 'search', (options) ->
+        promise = app.request 'decks', q: options.q
+        promise.done (deckSet) ->
+          self.collection = deckSet
+          self.render()

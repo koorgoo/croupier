@@ -1,18 +1,11 @@
 define [
   'marionette',
-  'cs!views/layouts/application',
-  'cs!views/search/form',
-  'cs!views/search/list'
-], (Marionette, AppLayout, SearchView, DeckListView) ->
+  'cs!controllers/decks'
+], (Marionette, DecksController) ->
   app = new Marionette.Application()
+  contr = new DecksController()
 
-  app.addInitializer () ->
-    layout = new AppLayout()
-    search = new SearchView()
-    decks = new DeckListView()
-
-    layout.render()
-    layout.header.show(search)
-    layout.content.show(decks)
+  app.reqres.setHandler 'decks', (options) ->
+    contr.getDeckSet(options)
 
   app
