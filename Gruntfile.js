@@ -44,6 +44,10 @@ module.exports = function(grunt) {
       }
     },
     watch: {
+      grunt: {
+        files: ['Gruntfile.js', 'app/scripts/config.js'],
+        options: { reload: true }
+      },
       scripts: {
         files: [
           'app/scripts/**/*.js',
