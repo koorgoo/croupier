@@ -2,8 +2,10 @@ define [
   'backbone'
 ], (Backbone) ->
   Backbone.Model.extend
-    urlRoot: '/api/deck/'
-
     defaults:
       owner: undefined
       name: ''
+      size: 0
+
+    url: () ->
+      "/api/deck/#{@get 'id'}"

@@ -6,11 +6,10 @@ define [
 ], ($, Marionette, Deck, DeckSet) ->
   DecksController = Marionette.Controller.extend
     getDeck: (options) ->
-      options or (options = {})
       defer = $.Deferred()
 
       setTimeout () ->
-        deck = new Deck id: 1
+        deck = new Deck id: options.id
         deck.fetch
           success: () ->
             defer.resolve deck

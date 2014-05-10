@@ -9,6 +9,9 @@ define [
       ''          : 'index'
       'deck/:id'  : 'deck'
 
+  router.listenTo app.vent, 'goto:index', () ->
+    router.navigate '/', { trigger: true }
+
   router.listenTo app.vent, 'goto:deck', (model) ->
     url = 'deck/' + model.get('id')
     router.navigate url, { trigger: true }
