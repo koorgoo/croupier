@@ -2,12 +2,18 @@ define [
   'backbone',
   'marionette',
   'cs!controllers/decks'
-], (Backbone, Marionette, DecksController) ->
+    'cs!views/layouts/application',
+], (Backbone, Marionette, decksContr, appLayout) ->
   app = new Marionette.Application()
-  contr = new DecksController()
+
+  app.reqres.setHandler 'deck', (options) ->
+    decksContr.getDeck(options)
 
   app.reqres.setHandler 'decks', (options) ->
-    contr.getDeckSet(options)
+    decksContr.getDeckSet(options)
+
+  app.addInitializer () ->
+    appLayout.render()
 
   app.addInitializer () ->
     Backbone.history.start

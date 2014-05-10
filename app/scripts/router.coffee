@@ -1,12 +1,16 @@
 define [
   'cs!app'
-  'cs!controllers/router'
   'marionette'
-], (app, routerController, Marionette) ->
+  'cs!controllers/router'
+], (app, Marionette, routerContr) ->
   router = new Marionette.AppRouter
-    controller: routerController
+    controller: routerContr
     appRoutes:
-      'deck/:id': 'openDeck'
+      ''          : 'index'
+      'deck/:id'  : 'deck'
 
-  router.listenTo app.vent, 'goto:deck', (id) ->
-    router.navigate 'deck/'+id, { trigger: true }
+  router.listenTo app.vent, 'goto:deck', (model) ->
+    url = 'deck/' + model.get('id')
+    router.navigate url, { trigger: true }
+
+  router

@@ -1,9 +1,22 @@
 define [
   'jquery',
   'marionette',
+  'cs!models/deck'
   'cs!collections/decks'
-], ($, Marionette, DeckSet) ->
-  Marionette.Controller.extend
+], ($, Marionette, Deck, DeckSet) ->
+  DecksController = Marionette.Controller.extend
+    getDeck: (options) ->
+      options or (options = {})
+      defer = $.Deferred()
+
+      setTimeout () ->
+        deck = new Deck id: 1
+        deck.fetch
+          success: () ->
+            defer.resolve deck
+
+      defer.promise()
+
     getDeckSet: (options) ->
       options or (options = {})
       defer = $.Deferred()
@@ -16,3 +29,5 @@ define [
             defer.resolve deckSet
 
       defer.promise()
+
+  new DecksController()
