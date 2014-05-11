@@ -3,8 +3,8 @@ define [
   'cs!views/layouts/application'
   'cs!views/search/form'
   'cs!views/search/list'
-  'cs!views/deck'
-], (app, layout, SearchView, DeckSetView, DeckView) ->
+  'cs!views/layouts/deck'
+], (app, layout, SearchView, DeckSetView, DeckLayout) ->
   index: () ->
     layout.header.show new SearchView()
     layout.content.reset()
@@ -18,4 +18,4 @@ define [
 
     options = id : id
     app.request('deck', options).done (deck) ->
-      layout.content.show new DeckView(model: deck)
+      layout.content.show new DeckLayout deck: deck

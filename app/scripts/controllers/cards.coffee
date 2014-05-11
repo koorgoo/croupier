@@ -1,27 +1,37 @@
 define [
+  'jquery'
+  'underscore'
   'marionette'
+  'cs!models/card'
   'cs!collections/cards'
-], (Marionette, CardSet) ->
-  Marionette.Controller.extend
-    initialize: (deck) ->
-      @deck = deck
+], ($, _, Marionette, Card, CardSet) ->
+  CardsController = Marionette.Controller.extend
+    initialize: () ->
+      @cache = {}
 
-    random: () ->
+    getDeckCards: (options) ->
       self = @
       defer = $.Deferred()
-     
-      if not @cards
-        @cards = new CardSet deck: @deck
-        @cards.fetch
-          success: () ->
-            defer.resolve self._getRandom()
-      else
+      key = options.deck.get 'id'
+      cards = _.result @cache, key 
+
+      if cards?
         setTimeout () ->
-          defer.resolve self._getRandom()
+          defer.resolve cards
+      else
+        new CardSet(deck: options.deck).fetch
+          success: (cards) ->
+            self.cache[key] = cards
+            defer.resolve cards
 
       defer.promise()
-      
 
-    _getRandom: () ->
-      max = @cards.length - 1
-      @cards.at _.random(max)
+    getRandomDeckCard: (options) ->
+      defer = $.Deferred()
+
+      @getDeckCards(deck: options.deck).then (cards) ->
+        defer.resolve cards.at _.random(cards.length - 1)
+
+      defer.promise()
+
+  new CardsController()

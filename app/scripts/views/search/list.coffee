@@ -10,7 +10,6 @@ define [
     initialize: () ->
       self = @
       @listenTo app.vent, 'search', (options) ->
-        promise = app.request 'decks', q: options.q
-        promise.done (deckSet) ->
+        app.request('decks', q: options.q).done (deckSet) ->
           self.collection = deckSet
           self.render()
