@@ -14,7 +14,8 @@ define [
         cardRegion: '#card'
 
       events:
-        'click #next': 'nextCard'
+        'click #next'    : 'nextCard'
+        'click #answer'  : 'showAnswer'
         'click a': (e) ->
           e.preventDefault()
           app.vent.trigger 'goto:index'
@@ -23,11 +24,15 @@ define [
         @deck = options.deck
 
       onShow: () ->
-        @deckRegion.show new DeckView model: @deck
+        @deckView = new DeckView model: @deck
+        @deckRegion.show @deckView
         @nextCard()
 
-      nextCard: (e) ->
+      nextCard: () ->
         self = @
-        e.preventDefault() if e
         app.request('randomDeckCard', deck: @deck).done (card) ->
-          self.cardRegion.show new DeckCardView model: card, deck: self.deck
+          self.cardView = new DeckCardView model: card, deck: self.deck
+          self.cardRegion.show self.cardView
+
+      showAnswer: () ->
+        @cardView?.showBack()
