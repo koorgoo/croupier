@@ -1,9 +1,10 @@
 define [
+  'marked',
   'underscore'
   'marionette'
   'cs!models/card'
   'text!templates/card.html'
-], (_, Marionette, Card, Template) ->
+], (marked, _, Marionette, Card, Template) ->
   Marionette.ItemView.extend
     tagName: 'p'
 
@@ -17,5 +18,14 @@ define [
     initialize: (options) ->
       @deck = options.deck
 
+    onShow: () ->
+      @ui.back.hide()
+
     showBack: () ->
       @ui.back.show()
+
+    serializeData: () ->
+      data = @model.toJSON()
+      data['front'] = marked(data['front'])
+      data['back'] = marked(data['back'])
+      data

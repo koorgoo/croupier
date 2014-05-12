@@ -6,6 +6,7 @@ requirejs.config({
     'backbone.babysitter' : 'lib/backbone.babysitter',
     'backbone.wreqr': 'lib/backbone.wreqr',
     marionette: 'lib/backbone.marionette',
+    marked: 'lib/marked',
     requireLib: 'lib/requirejs/require',
     text: 'lib/requirejs/text',
     cs: 'lib/requirejs/cs',
