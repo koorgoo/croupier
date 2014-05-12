@@ -4,9 +4,11 @@ define [
   'cs!views/layouts/application'
   'cs!controllers/decks'
   'cs!controllers/cards'
-], (Backbone, Marionette, appLayout, decksContr, cardsContr) ->
+], (Backbone, Marionette, appLayout, DecksController, DeckCardsController) ->
   app = new Marionette.Application()
 
+  decksContr = new DecksController()
+  cardsContr = new DeckCardsController()
 
   ### Request Handlers ###
 

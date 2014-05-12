@@ -5,7 +5,7 @@ define [
   'cs!models/card'
   'cs!collections/cards'
 ], ($, _, Marionette, Card, CardSet) ->
-  CardsController = Marionette.Controller.extend
+  Marionette.Controller.extend
     initialize: () ->
       @cache = {}
 
@@ -33,5 +33,3 @@ define [
         defer.resolve cards.at _.random(cards.length - 1)
 
       defer.promise()
-
-  new CardsController()

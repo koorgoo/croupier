@@ -4,7 +4,7 @@ define [
   'cs!models/deck'
   'cs!collections/decks'
 ], ($, Marionette, Deck, DeckSet) ->
-  DecksController = Marionette.Controller.extend
+  Marionette.Controller.extend
     getDeck: (options) ->
       defer = $.Deferred()
 
@@ -28,5 +28,3 @@ define [
             defer.resolve deckSet
 
       defer.promise()
-
-  new DecksController()
