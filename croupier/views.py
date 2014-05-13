@@ -4,7 +4,7 @@ from django.shortcuts import render
 
 from rest_framework import exceptions, generics, status
 from rest_framework.authentication import SessionAuthentication
-from rest_framework.permissions import IsAdminUser
+from rest_framework.permissions import IsAdminUser, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -39,6 +39,16 @@ class Logout(APIView):
         return Response()
 
 logout = Logout.as_view()
+
+
+class MeDetail(generics.RetrieveAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = UserSerializer
+
+    def get_object(self):
+        return self.request.user
+
+me = MeDetail.as_view()
 
 
 class AdminPermMixin:

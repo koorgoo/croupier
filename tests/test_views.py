@@ -50,6 +50,21 @@ class ApiAuthTests(TestCase):
         assert resp.status_code == status.HTTP_200_OK
 
 
+
+class ApiMeTest(TestCase):
+    url = reverse('api-me')
+
+    def test_cannot_retrieve_unauthed(self):
+        resp = self.client.get(self.url)
+        assert resp.status_code == status.HTTP_403_FORBIDDEN
+
+    def test_retrieve_authed(self):
+        self.login()
+        resp = self.client.get(self.url)
+        assert resp.status_code == status.HTTP_200_OK
+        assert resp.data['username'] == 'user'
+
+
 class ApiDecksTest(TestCase):
     url = reverse('api-decks')
 

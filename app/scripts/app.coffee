@@ -1,16 +1,21 @@
 define [
-  'backbone',
-  'marionette',
+  'backbone'
+  'marionette'
   'cs!views/layouts/application'
+  'cs!controllers/user'
   'cs!controllers/decks'
   'cs!controllers/cards'
-], (Backbone, Marionette, appLayout, DecksController, DeckCardsController) ->
+], (Backbone, Marionette, appLayout, UserController, DecksController, DeckCardsController) ->
   app = new Marionette.Application()
 
+  userContr = new UserController()
   decksContr = new DecksController()
   cardsContr = new DeckCardsController()
 
   ### Request Handlers ###
+
+  app.reqres.setHandler 'user', (options) ->
+    userContr.getCurrentUser(options)
 
   app.reqres.setHandler 'deck', (options) ->
     decksContr.getDeck(options)
