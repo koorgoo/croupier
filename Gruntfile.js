@@ -41,6 +41,12 @@ module.exports = function(grunt) {
         cwd: 'app/fonts/',
         src: ['**'],
         dest: 'croupier/static/croupier/fonts/'
+      },
+      editorcss: {
+        expand: true,
+        cwd: 'app/styles/epiceditor',
+        src: ['**'],
+        dest: 'croupier/static/croupier/css/epiceditor'
       }
     },
     watch: {

@@ -34,7 +34,7 @@ define [
 
   app.addInitializer () ->
     Backbone.history.start
-      pushState: true
+      hashChange: true
       root: '/'
 
   app

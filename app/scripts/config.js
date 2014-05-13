@@ -7,6 +7,7 @@ requirejs.config({
     'backbone.wreqr': 'lib/backbone.wreqr',
     marionette: 'lib/backbone.marionette',
     marked: 'lib/marked',
+    epiceditor: 'lib/epiceditor',
     requireLib: 'lib/requirejs/require',
     text: 'lib/requirejs/text',
     cs: 'lib/requirejs/cs',
@@ -32,6 +33,10 @@ requirejs.config({
         'backbone.wreqr'
       ],
       exports: 'Backbone.Marionette'
+    },
+    epiceditor: {
+      deps: ['marked'],
+      exports: 'epiceditor'
     }
   },
   stubModules: ['cs', 'text'],

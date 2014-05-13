@@ -20,5 +20,5 @@ urlpatterns = patterns('croupier.views',
 
     url(r'^admin/', include(admin.site.urls)),
 
-    url(r'^', 'index', name='index'),
+    url(r'^$', 'index', name='index'),
 )
