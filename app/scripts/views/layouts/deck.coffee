@@ -15,7 +15,8 @@ define [
         cardRegion: '#card'
 
       ui:
-        editButton: '#edit'
+        editButton:   '#edit'
+        hideCheckbox: '#hide'
 
       events:
         'click #next'    : 'nextCard'
@@ -24,12 +25,16 @@ define [
         'click a': (e) ->
           e.preventDefault()
           app.vent.trigger 'goto:index'
+        'change #hide': (e) ->
+          @hideAnswers = @ui.hideCheckbox.prop('checked')
 
       initialize: (options) ->
         @deck = options.deck
+        @hideAnswers = true
 
       onRender: () ->
         @ui.editButton.hide()
+        @ui.hideCheckbox.attr('checked', @hideAnswers)
 
       onShow: () ->
         @deckView = new DeckView model: @deck
@@ -39,7 +44,7 @@ define [
       nextCard: () ->
         self = @
         promise = app.request('randomDeckCard', deck: @deck).done (card) ->
-          self.cardView = new CardView model: card, deck: self.deck
+          self.cardView = new CardView model: card, deck: self.deck, hideAnswer: self.hideAnswers
           self.cardRegion.show self.cardView
 
         promise.done (card) ->

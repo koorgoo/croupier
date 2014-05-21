@@ -17,9 +17,12 @@ define [
 
     initialize: (options) ->
       @deck = options.deck
+      @hideAnswer = options.hideAnswer
 
     onShow: () ->
       @ui.back.hide()
+      if not @hideAnswer
+        @ui.back.show()
 
     showBack: () ->
       @ui.back.show()
